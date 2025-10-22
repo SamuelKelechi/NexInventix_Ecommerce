@@ -52,39 +52,101 @@
     border: 1px solid white;
     color: white;
 }
-
 .heroPageCardSection {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 90%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .heroPageCardSectionWrapper {
-    width: 90%;
-    background: #67585886;
-    height: 200px;
-    border-radius: 30px;
-    padding: 20px;
-    color: white;
+  width: 80%;
+  background: #67585886;
+  height: 200px;
+  border-radius: 30px;
+  padding: 20px 30px;
+  color: white;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(2px);
 }
 
+
 .heroPagePopularProducts {
-    width: 20%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .heroPagePopularProducts div {
-    border-bottom: 1px solid white;
-    height: 70%;    
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  height: 70%;
 }
+
 .heroPagePopularProducts div h2 {
-    font-size: 40px;
+  font-size: 40px;
 }
+
 .heroPagePopularProducts p {
-    color: rgb(168, 163, 155);
+  font-size: 14px;
+  color: #ddd;
+}
+
+.heroPageProductsList {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.heroProductCard {
+  position: relative;
+  background: #e0e5d8;
+  border-radius: 14px;
+  width: 190px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+}
+
+.heroProductCard img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  background: none;
+  border-radius: 5px;
+}
+
+.heroProductCardText span {
+  position: absolute;
+  bottom: 83%;
+  right: 20px;
+  transform: rotate(-90deg) translateY(50%);
+  transform-origin: right center;
+  font-size: 11px;
+  letter-spacing: 0px;
+  color: #444;
+  font-weight: 500;
+}
+
+.arrowIcon {
+  position: absolute;
+  bottom: 4px;
+  right: 3px;
+  background: white;
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 25px;
+  color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
