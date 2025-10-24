@@ -1,5 +1,6 @@
 import Header from "./components/Header"
 import Heropage from "./components/HeroPage"
+import ProductsList from "./components/ProductsList"
 
 const App = () => {
   return (

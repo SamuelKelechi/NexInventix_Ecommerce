@@ -1,14 +1,39 @@
+import axios from "axios";
 import "../styles/Heropage.css";
 import Header from "./Header";
 import { FiArrowUpRight } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import ProductsList from "./ProductsList";
 
 const Heropage = () => {
-  const products = [
+  // const products = [
+  //   { name: "SPICE JARS", image: "/public/spicejar.jpg" },
+  //   { name: "FRUIT BASKET", image: "/public/fruitbasket.jpg" },
+  //   { name: "RICE COOKER", image: "/public/ricecooker.jpg" },
+  //   { name: "BOWL SET", image: "/public/bowlset.jpg" },
+  // ];
+
+  const [products, setProducts] = useState([
     { name: "SPICE JARS", image: "/public/spicejar.jpg" },
     { name: "FRUIT BASKET", image: "/public/fruitbasket.jpg" },
     { name: "RICE COOKER", image: "/public/ricecooker.jpg" },
     { name: "BOWL SET", image: "/public/bowlset.jpg" },
-  ];
+  ])
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get('https://api.escuelajs.co/api/v1/categories?limit=4');
+      // console.log(response.data)
+      setProducts(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getCategories()
+  }, [])
+  
 
   return (
     <section className="heroPage">
@@ -54,6 +79,7 @@ const Heropage = () => {
         </div>
       </div>
     </div>
+    <ProductsList />
     </section>
   );
 };

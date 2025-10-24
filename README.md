@@ -17,3 +17,5 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 [UI to clone](https://www.behance.net/gallery/236552143/shopify-E-commerce-website?tracking_source=project_owner_other_projects)
+
+[API used](https://api.escuelajs.co/docs)
