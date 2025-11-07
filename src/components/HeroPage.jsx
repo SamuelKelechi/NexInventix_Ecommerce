@@ -1,11 +1,13 @@
 import axios from "axios";
 import "../styles/Heropage.css";
-import Header from "./Header";
 import { FiArrowUpRight } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductsList from "./ProductsList";
+import { AppContext } from "../global/AppContext";
 
 const Heropage = () => {
+  const { name } = useContext(AppContext)
+  console.log(name)
   // const products = [
   //   { name: "SPICE JARS", image: "/public/spicejar.jpg" },
   //   { name: "FRUIT BASKET", image: "/public/fruitbasket.jpg" },
@@ -33,11 +35,10 @@ const Heropage = () => {
   useEffect(() => {
     getCategories()
   }, [])
-  
+
 
   return (
     <section className="heroPage">
-      <Header />
       <div className="heroPageTextHolder">
         <div>
           <h1>
@@ -57,29 +58,28 @@ const Heropage = () => {
         </div>
       </div>
 
-  <div className="heroPageCardSection">
-      <div className="heroPageCardSectionWrapper">
-        <div className="heroPagePopularProducts">
-          <div>
-            <h2>Popular Products</h2>
-          </div>
-          <p>Popular Products 2025</p>
-        </div>
-
-        <div className="heroPageProductsList">
-          {products.map((item, index) => (
-            <div className="heroProductCard" key={index}>
-              <img src={item.image} alt={item.name} />
-              <div className="heroProductCardText">
-                <span>{item.name}</span>
-                <FiArrowUpRight className="arrowIcon" />
-              </div>
+      <div className="heroPageCardSection">
+        <div className="heroPageCardSectionWrapper">
+          <div className="heroPagePopularProducts">
+            <div>
+              <h2>Popular Products</h2>
             </div>
-          ))}
+            <p>Popular Products 2025</p>
+          </div>
+
+          <div className="heroPageProductsList">
+            {products.map((item, index) => (
+              <div className="heroProductCard" key={index}>
+                <img src={item.image} alt={item.name} />
+                <div className="heroProductCardText">
+                  <span>{item.name}</span>
+                  <FiArrowUpRight className="arrowIcon" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-    <ProductsList />
     </section>
   );
 };

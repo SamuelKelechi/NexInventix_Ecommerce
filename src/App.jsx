@@ -1,12 +1,9 @@
-import Header from "./components/Header"
-import Heropage from "./components/HeroPage"
-import ProductsList from "./components/ProductsList"
+import { RouterProvider } from "react-router-dom"
+import { Router } from "./routes/Router"
 
 const App = () => {
   return (
-    <main style={{minHeight: "100%", background: "black"}}>
-      <Heropage />
-    </main>
+    <RouterProvider router={Router} />
   )
 }
 
