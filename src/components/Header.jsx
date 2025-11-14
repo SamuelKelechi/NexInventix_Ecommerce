@@ -1,17 +1,20 @@
 import { useContext, useState } from "react";
 import "../styles/Header.css";
 import { AppContext } from "../global/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const { cart, removeFromCart } = useContext(AppContext);
     const [showCart, setShowCart] = useState(false);
+    const navigate = useNavigate()
 
     const handleCart = () => {
         setShowCart(!showCart);
     };
 
     const handleCheckout = () => {
-        alert("Proceeding to checkout...");
+        navigate("/checkout"),
+            alert("Proceeding to checkout...");
     };
 
     return (
