@@ -1,45 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({ children, products }) => {
    const [cart, setCart] = useState([]);
 
+   // Load cart from localStorage on mount
    useEffect(() => {
-      const savedCart = JSON.parse(localStorage.getItem("cart"));
-      if (savedCart && Array.isArray(savedCart)) {
-         setCart(savedCart);
-      } else {
+      try {
+         const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+         // Merge with server products
+         const mergedCart = savedCart
+            .map((savedItem) => {
+               const product = products.find(
+                  (p) => p.id.toString() === savedItem.id.toString()
+               );
+               return product ? { ...product, quantity: savedItem.quantity } : null;
+            })
+            .filter(Boolean);
+         setCart(mergedCart);
+      } catch {
          setCart([]);
       }
-   }, []);
+   }, [products]);
 
+   // Save cart to localStorage whenever it changes
    useEffect(() => {
-      localStorage.setItem("cart", JSON.stringify(cart));
+      // Save only id and quantity
+      const cartToSave = cart.map((item) => ({
+         id: item.id,
+         quantity: item.quantity,
+      }));
+      localStorage.setItem("cart", JSON.stringify(cartToSave));
    }, [cart]);
-
-
-
-
 
    const updateCart = (product) => {
       setCart((prevCart) => {
-         const existngproduct = prevCart.find((item) => item.id === product.id);
-         if (existngproduct) {
+         const existingProduct = prevCart.find(
+            (item) => item.id.toString() === product.id.toString()
+         );
+         if (existingProduct) {
             return prevCart.map((item) =>
-               item.id === product.id ? { ...existngproduct, quantity: existngproduct.quantity + 1 } : item
+               item.id.toString() === product.id.toString()
+                  ? { ...item, quantity: item.quantity + 1 }
+                  : item
             );
          }
-         const updated = [...prevCart, { ...product, quantity: 1 }];
-         return updated;
+         return [...prevCart, { ...product, quantity: 1 }];
       });
    };
 
    const removeFromCart = (productId) => {
-      setCart((prevCart) => {
-         const updated = prevCart.filter((item) => item.id !== productId);
-         localStorage.setItem("cart", JSON.stringify(updated));
-         return updated;
-      });
+      setCart((prevCart) =>
+         prevCart.filter((item) => item.id.toString() !== productId.toString())
+      );
    };
 
    return (
